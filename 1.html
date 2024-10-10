@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitung Biaya Pembelian Barang</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .form-section {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+        .btn-group {
+            margin-bottom: 20px;
+        }
+        h4 {
+            margin-bottom: 15px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .btn img {
+            width: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">HITUNG JAJAN CAISTIP ID</h1>
+        
+        <div class="btn-group btn-group-justified">
+            <a class="btn btn-primary" id="btn-korea"><img src="https://flagcdn.com/kr.svg" alt="Korea Selatan">Korea</a>
+            <a class="btn btn-primary" id="btn-jepang"><img src="https://flagcdn.com/jp.svg" alt="Jepang">Jepang</a>
+            <a class="btn btn-primary" id="btn-china"><img src="https://flagcdn.com/cn.svg" alt="China">China</a>
+            <a class="btn btn-primary" id="btn-thailand"><img src="https://flagcdn.com/th.svg" alt="Thailand">Thailand</a>
+        </div>
+
+        <div class="form-section" id="form-korea">
+            <h4>JAJAN KR:</h4>
+            <form id="purchaseFormKorea">
+                <div class="form-group">
+                    <label for="rateKorea">Rate</label>
+                    <input type="number" id="rateKorea" class="form-control" value="12" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="priceKorea">Price ₩</label>
+                    <input type="number" id="priceKorea" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="shippingKorea">Shipping Lokal ₩</label>
+                    <input type="number" id="shippingKorea" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantityKorea">Jumlah Yang Take</label>
+                    <input type="number" id="quantityKorea" class="form-control" required>
+                </div>
+                <button type="button" class="btn btn-success" onclick="calculateTotal('Korea')">Hitung</button>
+                <div class="result" id="resultKorea"></div>
+            </form>
+        </div>
+
+        <div class="form-section" id="form-jepang">
+            <h4>JAJAN JP:</h4>
+            <form id="purchaseFormJepang">
+                <div class="form-group">
+                    <label for="rateJepang">Rate</label>
+                    <input type="number" id="rateJepang" class="form-control" value="110" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="priceJepang">Price ¥</label>
+                    <input type="number" id="priceJepang" class="form-control" required>
+                </div>
+                <button type="button" class="btn btn-success" onclick="calculateTotal('Jepang')">Hitung</button>
+                <div class="result" id="resultJepang"></div>
+            </form>
+        </div>
+
+        <div class="form-section" id="form-china">
+            <h4>JAJAN CH:</h4>
+            <form id="purchaseFormChina">
+                <div class="form-group">
+                    <label for="rateChina">Rate</label>
+                    <input type="number" id="rateChina" class="form-control" value="2335" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="priceChina">Price ฿</label>
+                    <input type="number" id="priceChina" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="shippingChina">Shipping Lokal ฿</label>
+                    <input type="number" id="shippingChina" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantityChina">Jumlah Yang Take</label>
+                    <input type="number" id="quantityChina" class="form-control" required>
+                </div>
+                <button type="button" class="btn btn-success" onclick="calculateTotal('China')">Hitung</button>
+                <div class="result" id="resultChina"></div>
+            </form>
+        </div>
+
+        <div class="form-section" id="form-thailand">
+            <h4>JAJAN TH:</h4>
+            <form id="purchaseFormThailand">
+                <div class="form-group">
+                    <label for="rateThailand">Rate</label>
+                    <input type="number" id="rateThailand" class="form-control" value="475" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="priceThailand">Price</label>
+                    <input type="number" id="priceThailand" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="shippingThailand">Shipping Lokal</label>
+                    <input type="number" id="shippingThailand" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantityThailand">Jumlah Yang Take</label>
+                    <input type="number" id="quantityThailand" class="form-control" required>
+                </div>
+                <button type="button" class="btn btn-success" onclick="calculateTotal('Thailand')">Hitung</button>
+                <div class="result" id="resultThailand"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".btn-primary").click(function() {
+                $(".form-section").hide();
+                var countryId = $(this).attr("id").replace("btn-", "form-");
+                $("#" + countryId).show();
+            });
+        });
+
+        function calculateTotal(country) {
+            const rate = {
+                Korea: 12,
+                Jepang: 110,
+                China: 2335,
+                Thailand: 475
+            };
+
+            const price = parseFloat($('#price' + country).val()) || 0;
+            const shippingLocal = parseFloat($('#shipping' + country).val()) || 0;
+            const quantity = parseInt($('#quantity' + country).val()) || 1;
+
+            let totalWarehouse = 15000/quantity; // Biaya warehouse untuk Jepang, Korea, China, Thailand
+            let totalAdmin = (country !== 'Jepang') ? (2000) : 0; // Biaya admin hanya untuk negara selain Jepang
+
+            const totalPrice = price * rate[country];
+            const totalShipping = shippingLocal * rate[country] / quantity;
+            const totalCost = totalPrice + totalShipping + totalWarehouse + totalAdmin;
+
+            $('#result' + country).text(`Total Biaya: ${totalCost.toFixed(2)} (dalam mata uang lokal)`);
+        }
+    </script>
+</body>
+</html>
